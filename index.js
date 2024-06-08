@@ -1,6 +1,6 @@
 /* MIT license */
 var colorNames = require('color-name');
-var swizzle = require('simple-swizzle');
+// var swizzle = require('simple-swizzle');
 var hasOwnProperty = Object.hasOwnProperty;
 
 var reverseNames = Object.create(null);
@@ -174,7 +174,8 @@ cs.get.hwb = function (string) {
 };
 
 cs.to.hex = function () {
-	var rgba = swizzle(arguments);
+	// var rgba = swizzle(arguments);
+	var rgba = [...arguments].flatMap(i => i);
 
 	return (
 		'#' +
@@ -188,7 +189,8 @@ cs.to.hex = function () {
 };
 
 cs.to.rgb = function () {
-	var rgba = swizzle(arguments);
+	// var rgba = swizzle(arguments);
+	var rgba = [...arguments].flatMap(i => i);
 
 	return rgba.length < 4 || rgba[3] === 1
 		? 'rgb(' + Math.round(rgba[0]) + ', ' + Math.round(rgba[1]) + ', ' + Math.round(rgba[2]) + ')'
@@ -196,7 +198,8 @@ cs.to.rgb = function () {
 };
 
 cs.to.rgb.percent = function () {
-	var rgba = swizzle(arguments);
+	// var rgba = swizzle(arguments);
+	var rgba = [...arguments].flatMap(i => i);
 
 	var r = Math.round(rgba[0] / 255 * 100);
 	var g = Math.round(rgba[1] / 255 * 100);
@@ -208,7 +211,8 @@ cs.to.rgb.percent = function () {
 };
 
 cs.to.hsl = function () {
-	var hsla = swizzle(arguments);
+	// var hsla = swizzle(arguments);
+	var hsla = [...arguments].flatMap(i => i);
 	return hsla.length < 4 || hsla[3] === 1
 		? 'hsl(' + hsla[0] + ', ' + hsla[1] + '%, ' + hsla[2] + '%)'
 		: 'hsla(' + hsla[0] + ', ' + hsla[1] + '%, ' + hsla[2] + '%, ' + hsla[3] + ')';
@@ -217,7 +221,8 @@ cs.to.hsl = function () {
 // hwb is a bit different than rgb(a) & hsl(a) since there is no alpha specific syntax
 // (hwb have alpha optional & 1 is default value)
 cs.to.hwb = function () {
-	var hwba = swizzle(arguments);
+	// var hwba = swizzle(arguments);
+	var hwba = [...arguments].flatMap(i => i);
 
 	var a = '';
 	if (hwba.length >= 4 && hwba[3] !== 1) {
